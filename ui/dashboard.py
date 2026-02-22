@@ -5,7 +5,14 @@ import plotly.express as px
 import streamlit as st
 from pathlib import Path
 
-RESULTS_DIR = Path(__file__).parent.parent / "results"
+# Robust path detection for Streamlit Cloud and local use
+POSSIBLE_PATHS = [
+    Path(__file__).parent.parent / "results",
+    Path.cwd() / "results",
+    Path("results")
+]
+
+RESULTS_DIR = next((p for p in POSSIBLE_PATHS if p.exists() and p.is_dir()), POSSIBLE_PATHS[0])
 
 st.set_page_config(
     page_title = "RAG Evaluation Dashboard",
