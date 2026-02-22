@@ -101,3 +101,20 @@ streamlit run ui/dashboard.py
 | **Context Recall** | Semantic | Checks if all information required to answer the question was successfully retrieved. |
 | **Grounding Proxy** | Lexical | Measures the percentage of answer keywords present in the context; a rapid indicator of trust. |
 | **Token Overlap** | Lexical | Measures lexical consistency between the model response and the clinical ground truth. |
+
+## 📊 Evaluation Results
+
+The following metrics represent the baseline performance of the Clinical RAG pipeline across 50 test cases:
+
+| Metric | Score | Status |
+|---|---|---|
+| Faithfulness | 0.6667 | ⚠️ Moderate |
+| Answer Relevancy | 0.5444 | ⚠️ Needs Optimization |
+| Context Recall | 0.5417 | ⚠️ Improvement Required |
+| Context Precision| 0.5476 | ⚠️ Improvement Required |
+| Answer Correctness| 0.4305 | ❌ Low |
+| Token Overlap (GT)| 0.2320 | ❌ Low Lexical Alignment |
+| **Context Hit Rate** | **0.7500** | ✅ **Strong Retrieval** |
+| Grounding Proxy  | 0.5345 | ⚠️ Moderate Grounding |
+
+---

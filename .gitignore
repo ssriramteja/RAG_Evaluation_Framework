@@ -1,5 +1,5 @@
 .env
-results/
+# results/ (Removed to allow deployment of baseline evaluations)
 __pycache__/
 *.pyc
 venv/

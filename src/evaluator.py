@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from pathlib import Path
 from dotenv import load_dotenv
+import itertools
 
 from datasets import Dataset
 from ragas import evaluate
@@ -20,28 +21,62 @@ from metrics import compute_all_custom_metrics
 
 load_dotenv()
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+# Collect all available Groq API keys from environment
+API_KEYS = [
+    os.getenv("GROQ_API_KEY"),
+    os.getenv("GROQ_API_KEY_2"),
+    os.getenv("GROQ_API_KEY_3"),
+    os.getenv("GROQ_API_KEY_4")
+]
+# Filter out empty/None keys
+API_KEYS = [k for k in API_KEYS if k]
+
 RESULTS_DIR  = Path(__file__).parent.parent / "results"
 RESULTS_DIR.mkdir(exist_ok=True)
+
+
+class GroqMultiKeyLLM(ChatGroq):
+    """
+    Custom wrapper for ChatGroq that rotates through multiple API keys
+    to bypass rate limits and ensures n=1 compatibility with RAGAS.
+    """
+    def __init__(self, *args, keys=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Bypassing Pydantic validation for internal state
+        object.__setattr__(self, "key_cycle", itertools.cycle(keys) if keys else None)
+
+    def _rotate_key(self):
+        if hasattr(self, "key_cycle") and self.key_cycle:
+            new_key = next(self.key_cycle)
+            # Use object.__setattr__ for api_key as well to be safe with Pydantic
+            object.__setattr__(self, "api_key", new_key)
+
+    def generate(self, prompts, stop=None, callbacks=None, **kwargs):
+        self._rotate_key()
+        if "n" in kwargs and kwargs["n"] > 1:
+            kwargs["n"] = 1
+        return super().generate(prompts, stop=stop, callbacks=callbacks, **kwargs)
+
+    async def agenerate(self, prompts, stop=None, callbacks=None, **kwargs):
+        self._rotate_key()
+        if "n" in kwargs and kwargs["n"] > 1:
+            kwargs["n"] = 1
+        return await super().agenerate(prompts, stop=stop, callbacks=callbacks, **kwargs)
 
 
 class RAGEvaluator:
     """
     Automated RAG evaluation engine using RAGAS and custom lexical metrics.
-
-    RAGAS metrics are selected to provide a multi-dimensional view of 
-    performance:
-    - Faithfulness & Answer Relevancy: Measure generation quality.
-    - Context Recall & Precision: Measure retrieval effectiveness.
+    Utilizes multi-key rotation for high-performance clinical validation.
     """
 
     def __init__(self):
-        print("Initializing RAGAS evaluator (Groq Llama 3.3 + MiniLM)...")
+        print(f"Initializing RAGAS evaluator (Multi-Key Support: {len(API_KEYS)} keys)...")
 
-        # LLM Judge for RAGAS semantic evaluation
-        self.llm = ChatGroq(
-            model       = "llama-3.3-70b-versatile",
-            api_key     = GROQ_API_KEY,
+        # LLM Judge with Multi-Key Rotation
+        self.llm = GroqMultiKeyLLM(
+            model       = "llama-3.1-8b-instant",
+            keys        = API_KEYS,
             temperature = 0.0
         )
 
@@ -57,11 +92,8 @@ class RAGEvaluator:
 
     def run_ragas(self, rag_results: list[dict]) -> pd.DataFrame:
         """
-        Run RAGAS 5-metric evaluation over all RAG outputs.
-        Returns a DataFrame with one row per question + all scores.
+        Run RAGAS evaluation over all RAG outputs.
         """
-
-        # RAGAS expects a HuggingFace Dataset with these exact column names
         dataset = Dataset.from_dict({
             "question"  : [r["question"]          for r in rag_results],
             "answer"    : [r["answer"]             for r in rag_results],
@@ -69,9 +101,8 @@ class RAGEvaluator:
             "ground_truth": [r["ground_truth"]     for r in rag_results],
         })
 
-        print("Executing RAGAS semantic evaluation (LLM-as-judge)...")
-        print("Note: This process is computationally intensive and may take several minutes.\n")
-
+        print("Executing parallel RAGAS semantic evaluation...")
+        
         result = evaluate(
             dataset = dataset,
             metrics = [
@@ -93,7 +124,7 @@ class RAGEvaluator:
 
     def run_custom_metrics(self, rag_results: list[dict]) -> pd.DataFrame:
         """
-        Run lightweight custom metrics (no LLM needed).
+        Run lightweight custom metrics.
         """
         rows = []
         for item in rag_results:
@@ -105,28 +136,28 @@ class RAGEvaluator:
 
     def evaluate_all(self, rag_results: list[dict]) -> pd.DataFrame:
         """
-        Full evaluation: RAGAS + custom metrics, merged into one DataFrame.
+        Full evaluation: RAGAS + custom metrics.
         """
-        # RAGAS metrics
         ragas_df  = self.run_ragas(rag_results)
+        
+        if "user_input" in ragas_df.columns and "question" not in ragas_df.columns:
+            ragas_df = ragas_df.rename(columns={"user_input": "question"})
 
-        # Custom metrics
         custom_df = self.run_custom_metrics(rag_results)
 
-        # Merge on question
-        merged_df = ragas_df.merge(custom_df, on="question", how="left")
+        if "question" in ragas_df.columns:
+            merged_df = ragas_df.merge(custom_df, on="question", how="left")
+        else:
+            print("Warning: Contextual merge failed. Using direct concatenation.")
+            custom_cols = custom_df.drop(columns=["question"], errors="ignore")
+            merged_df = pd.concat([ragas_df, custom_cols], axis=1)
 
-        # Save to CSV
         csv_path = RESULTS_DIR / "eval_results.csv"
         merged_df.to_csv(csv_path, index=False)
-        print(f"\n✅ Full results saved to {csv_path}")
-
-        # Save summary stats
+        
         numeric_cols = merged_df.select_dtypes(include="number").columns
         summary = merged_df[numeric_cols].describe().round(4)
-        summary_path = RESULTS_DIR / "eval_summary.csv"
-        summary.to_csv(summary_path)
-        print(f"✅ Summary stats saved to {summary_path}")
+        summary.to_csv(RESULTS_DIR / "eval_summary.csv")
 
         return merged_df
 
@@ -134,18 +165,12 @@ class RAGEvaluator:
     def print_summary(self, df: pd.DataFrame):
         """Print a readable summary table to terminal."""
         print("\n" + "=" * 60)
-        print("  RAG EVALUATION SUMMARY")
+        print("  RAG EVALUATION SUMMARY (Multi-Key Result)")
         print("=" * 60)
 
         metrics = [
-            "faithfulness",
-            "answer_relevancy",
-            "context_recall",
-            "context_precision",
-            "answer_correctness",
-            "token_overlap_vs_gt",
-            "grounding_proxy",
-            "context_hit_rate"
+            "faithfulness", "answer_relevancy", "context_recall",
+            "context_precision", "answer_correctness", "token_overlap_vs_gt"
         ]
 
         for col in metrics:
@@ -153,15 +178,13 @@ class RAGEvaluator:
                 score = df[col].mean()
                 bar   = "█" * int(score * 20)
                 print(f"  {col:<30} {score:.3f}  {bar}")
-
         print("=" * 60)
 
 
 if __name__ == "__main__":
-    # Load processed RAG outputs for evaluation
     outputs_path = RESULTS_DIR / "rag_outputs.json"
     if not outputs_path.exists():
-        print("Error: RAG output file not found. Ensure rag_runner.py has been executed.")
+        print("Error: RAG output file not found.")
         exit(1)
 
     with open(outputs_path) as f:

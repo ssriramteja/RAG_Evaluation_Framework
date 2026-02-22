@@ -1,0 +1,157 @@
+[
+  {
+    "question": "What are the symptoms of the patient with chest pain?",
+    "answer": "The patient (P001) with chest pain has the following symptoms: \n\n1. Acute chest pain radiating to left arm\n2. Diaphoresis (sweating)\n3. Nausea\n4. Shortness of breath \n\nThese symptoms have been present for 3 hours.",
+    "contexts": [
+      "PATIENT_ID: P001\nDATE: 2024-01-15\nCHIEF_COMPLAINT: Chest pain and shortness of breath\nHISTORY: 65-year-old male with history of hypertension and type 2 diabetes presenting with acute chest pain radiating to left arm for 3 hours. Patient reports associated diaphoresis and nausea.",
+      "VITALS: BP 188/110 mmHg, HR 84 bpm, RR 16/min, O2 Sat 97%, Temp 98.6F\nASSESSMENT: Acute ischemic stroke. NIHSS score 14. CT head negative for hemorrhage. Within tPA window.",
+      "PATIENT_ID: P002\nDATE: 2024-01-16\nCHIEF_COMPLAINT: Fever and productive cough\nHISTORY: 45-year-old female with no significant past medical history presenting with 5-day history of fever (101.2F), productive cough with yellow sputum, and right-sided pleuritic chest pain.",
+      "PATIENT_ID: P006\nDATE: 2024-01-20\nCHIEF_COMPLAINT: Severe headache\nHISTORY: 34-year-old female with history of migraines presenting with worst headache of life, sudden onset, rated 10/10. No aura. No prior similar episode.\nVITALS: BP 148/92 mmHg, HR 96 bpm, RR 18/min, O2 Sat 99%, Temp 98.7F"
+    ],
+    "ground_truth": "Patient P001 is a 65-year-old male presenting with acute chest pain radiating to the left arm for 3 hours, associated with diaphoresis and nausea. ECG shows ST elevation suggesting STEMI.",
+    "reference_contexts": [
+      "PATIENT_ID: P001. 65-year-old male with history of hypertension and type 2 diabetes presenting with acute chest pain radiating to left arm for 3 hours. Associated diaphoresis and nausea.",
+      "ASSESSMENT: Suspected STEMI. Troponin elevated at 2.4 ng/mL. ECG shows ST elevation in leads II, III, aVF."
+    ]
+  },
+  {
+    "question": "Which patient had a stroke and what treatment was given?",
+    "answer": "The patient, P010, a 68-year-old male, had an acute ischemic stroke. The treatment planned for him includes tPA (tissue plasminogen activator) administration, and he is also scheduled to receive antiplatelet therapy after tPA.",
+    "contexts": [
+      "PATIENT_ID: P010\nDATE: 2024-01-24\nCHIEF_COMPLAINT: Confusion and weakness\nHISTORY: 68-year-old male with hypertension presenting with sudden onset right-sided facial droop, right arm weakness, and slurred speech starting 1 hour ago. Wife confirms acute onset.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA.\nRISK_LEVEL: HIGH",
+      "VITALS: BP 188/110 mmHg, HR 84 bpm, RR 16/min, O2 Sat 97%, Temp 98.6F\nASSESSMENT: Acute ischemic stroke. NIHSS score 14. CT head negative for hemorrhage. Within tPA window.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH"
+    ],
+    "ground_truth": "Patient P010, a 68-year-old male, had an acute ischemic stroke with right-sided facial droop and arm weakness. Treatment included tPA administration within the time window, stroke team activation, and ICU admission.",
+    "reference_contexts": [
+      "PATIENT_ID: P010. 68-year-old male with hypertension presenting with sudden onset right-sided facial droop, right arm weakness, and slurred speech starting 1 hour ago.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA."
+    ]
+  },
+  {
+    "question": "What medications were prescribed to the diabetic patient?",
+    "answer": "I don't have enough information about the medications prescribed to the diabetic patient (P004) for their diabetes. The provided context only mentions medications prescribed for a suspected urinary tract infection (Ciprofloxacin) and antiplatelet therapy post-tPA (which seems to be related to a stroke, but the context does not clearly state that P004 had a stroke).",
+    "contexts": [
+      "PATIENT_ID: P004\nDATE: 2024-01-18\nCHIEF_COMPLAINT: Uncontrolled blood sugar\nHISTORY: 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL. Reports poor medication compliance and increased thirst and urination for 1 week.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA.\nRISK_LEVEL: HIGH",
+      "VITALS: BP 138/82 mmHg, HR 102 bpm, RR 16/min, O2 Sat 97%, Temp 99.8F\nASSESSMENT: Suspected urinary tract infection with delirium. Urinalysis positive for leukocytes and nitrites.\nPLAN: Urine culture sent. Ciprofloxacin 500mg BID. Fall precautions. Neurology consult for delirium management.",
+      "PATIENT_ID: P009\nDATE: 2024-01-23\nCHIEF_COMPLAINT: Rash and joint pain\nHISTORY: 30-year-old female presenting with butterfly-shaped facial rash, bilateral joint pain and swelling of hands and knees, fatigue for 3 months. Family history of autoimmune disease."
+    ],
+    "ground_truth": "Patient P004 with uncontrolled type 2 diabetes and hyperglycemic hyperosmolar state was treated with an IV insulin drip, aggressive IV fluid resuscitation, and referred to endocrinology and diabetes education.",
+    "reference_contexts": [
+      "PATIENT_ID: P004. 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL.",
+      "PLAN: IV insulin drip. Aggressive IV fluid resuscitation. Endocrinology consult. Diabetes education referral."
+    ]
+  },
+  {
+    "question": "Which patients are at high risk and need urgent attention?",
+    "answer": "Based on the provided context, patient P009 is at high risk and needs urgent attention, as indicated by the RISK_LEVEL: HIGH mentioned twice in the context.",
+    "contexts": [
+      "PATIENT_ID: P009\nDATE: 2024-01-23\nCHIEF_COMPLAINT: Rash and joint pain\nHISTORY: 30-year-old female presenting with butterfly-shaped facial rash, bilateral joint pain and swelling of hands and knees, fatigue for 3 months. Family history of autoimmune disease.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA.\nRISK_LEVEL: HIGH",
+      "VITALS: BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Sat 88% on room air, Temp 98.5F\nASSESSMENT: Acute decompensated heart failure exacerbation. BNP elevated at 1850 pg/mL. CXR shows pulmonary edema.\nPLAN: IV Lasix 80mg. Oxygen therapy. Strict I&O. Daily weights. Cardiology consult. Echo ordered.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH"
+    ],
+    "ground_truth": "High risk patients include P001 (suspected STEMI), P003 (delirium with UTI), P004 (hyperglycemic hyperosmolar state), P006 (possible subarachnoid hemorrhage), P007 (acute decompensated heart failure), P008 (acute appendicitis), and P010 (acute ischemic stroke).",
+    "reference_contexts": [
+      "PATIENT_ID: P001. RISK_LEVEL: HIGH. Suspected STEMI. Emergent cardiology consult.",
+      "PATIENT_ID: P010. RISK_LEVEL: HIGH. Acute ischemic stroke. tPA administration.",
+      "PATIENT_ID: P007. RISK_LEVEL: HIGH. Acute decompensated heart failure. BNP elevated at 1850.",
+      "PATIENT_ID: P006. RISK_LEVEL: HIGH. Rule out subarachnoid hemorrhage."
+    ]
+  },
+  {
+    "question": "What were the vitals of the patient with heart failure?",
+    "answer": "I don't have enough information. There is no mention of a patient with heart failure in the provided context. The context only mentions two patients, P004 with type 2 diabetes and acute ischemic stroke, and P006 with a severe headache. Neither patient is described as having heart failure.",
+    "contexts": [
+      "PATIENT_ID: P004\nDATE: 2024-01-18\nCHIEF_COMPLAINT: Uncontrolled blood sugar\nHISTORY: 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL. Reports poor medication compliance and increased thirst and urination for 1 week.",
+      "VITALS: BP 188/110 mmHg, HR 84 bpm, RR 16/min, O2 Sat 97%, Temp 98.6F\nASSESSMENT: Acute ischemic stroke. NIHSS score 14. CT head negative for hemorrhage. Within tPA window.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA.\nRISK_LEVEL: HIGH",
+      "PATIENT_ID: P006\nDATE: 2024-01-20\nCHIEF_COMPLAINT: Severe headache\nHISTORY: 34-year-old female with history of migraines presenting with worst headache of life, sudden onset, rated 10/10. No aura. No prior similar episode.\nVITALS: BP 148/92 mmHg, HR 96 bpm, RR 18/min, O2 Sat 99%, Temp 98.7F"
+    ],
+    "ground_truth": "Patient P007 with acute decompensated heart failure had BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Saturation 88% on room air, and Temperature 98.5F.",
+    "reference_contexts": [
+      "PATIENT_ID: P007. VITALS: BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Sat 88% on room air, Temp 98.5F.",
+      "ASSESSMENT: Acute decompensated heart failure exacerbation. BNP elevated at 1850 pg/mL."
+    ]
+  },
+  {
+    "question": "What was the diagnosis for the patient with facial rash and joint pain?",
+    "answer": "I don't have enough information. The context only provides the chief complaint, history, assessment, and plan for the patient, but it does not mention a confirmed diagnosis. The patient's symptoms, such as a butterfly-shaped facial rash and joint pain, are consistent with Systemic Lupus Erythematosus (SLE), but this is not explicitly stated in the context.",
+    "contexts": [
+      "PATIENT_ID: P009\nDATE: 2024-01-23\nCHIEF_COMPLAINT: Rash and joint pain\nHISTORY: 30-year-old female presenting with butterfly-shaped facial rash, bilateral joint pain and swelling of hands and knees, fatigue for 3 months. Family history of autoimmune disease.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH",
+      "PATIENT_ID: P001\nDATE: 2024-01-15\nCHIEF_COMPLAINT: Chest pain and shortness of breath\nHISTORY: 65-year-old male with history of hypertension and type 2 diabetes presenting with acute chest pain radiating to left arm for 3 hours. Patient reports associated diaphoresis and nausea.",
+      "PATIENT_ID: P002\nDATE: 2024-01-16\nCHIEF_COMPLAINT: Fever and productive cough\nHISTORY: 45-year-old female with no significant past medical history presenting with 5-day history of fever (101.2F), productive cough with yellow sputum, and right-sided pleuritic chest pain."
+    ],
+    "ground_truth": "Patient P009, a 30-year-old female, was suspected to have Systemic Lupus Erythematosus (SLE) based on butterfly facial rash, bilateral joint swelling, ANA positive 1:640, and elevated anti-dsDNA. She was started on hydroxychloroquine.",
+    "reference_contexts": [
+      "PATIENT_ID: P009. 30-year-old female presenting with butterfly-shaped facial rash, bilateral joint pain and swelling.",
+      "ASSESSMENT: Suspected Systemic Lupus Erythematosus (SLE). ANA positive 1:640. Anti-dsDNA elevated.",
+      "PLAN: Rheumatology referral. Hydroxychloroquine initiated."
+    ]
+  },
+  {
+    "question": "Which patient had appendicitis and what was the plan?",
+    "answer": "The patient with appendicitis was P008. The plan for this patient was: \n1. Surgery consult for appendectomy.\n2. NPO (nothing by mouth).\n3. IV antibiotics.\n4. IV fluids.",
+    "contexts": [
+      "PATIENT_ID: P008\nDATE: 2024-01-22\nCHIEF_COMPLAINT: Abdominal pain\nHISTORY: 28-year-old female presenting with 12-hour history of periumbilical pain migrating to right lower quadrant. Associated nausea and one episode of vomiting. Low-grade fever.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH",
+      "VITALS: BP 116/72 mmHg, HR 92 bpm, RR 16/min, O2 Sat 99%, Temp 100.4F\nASSESSMENT: Suspected acute appendicitis. WBC 13.8. CT abdomen shows inflamed appendix with periappendiceal fat stranding.\nPLAN: Surgery consult for appendectomy. NPO. IV antibiotics. IV fluids.\nRISK_LEVEL: HIGH",
+      "PATIENT_ID: P004\nDATE: 2024-01-18\nCHIEF_COMPLAINT: Uncontrolled blood sugar\nHISTORY: 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL. Reports poor medication compliance and increased thirst and urination for 1 week."
+    ],
+    "ground_truth": "Patient P008, a 28-year-old female, presented with acute appendicitis confirmed by CT scan. The plan included surgery consult for appendectomy, NPO status, IV antibiotics, and IV fluids.",
+    "reference_contexts": [
+      "PATIENT_ID: P008. CT abdomen shows inflamed appendix with periappendiceal fat stranding.",
+      "PLAN: Surgery consult for appendectomy. NPO. IV antibiotics. IV fluids."
+    ]
+  },
+  {
+    "question": "What were the findings for the patient with altered mental status?",
+    "answer": "The patient (P003) with altered mental status had a CT head that was negative for hemorrhage, but was assessed with acute ischemic stroke, with a NIHSS score of 14, and was within the tPA window. Initially, the plan was to rule out subarachnoid hemorrhage.",
+    "contexts": [
+      "PATIENT_ID: P003\nDATE: 2024-01-17\nCHIEF_COMPLAINT: Altered mental status\nHISTORY: 78-year-old female with history of Alzheimer's disease presenting with acute confusion, agitation, and urinary incontinence. Family reports sudden onset over 24 hours.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH",
+      "VITALS: BP 188/110 mmHg, HR 84 bpm, RR 16/min, O2 Sat 97%, Temp 98.6F\nASSESSMENT: Acute ischemic stroke. NIHSS score 14. CT head negative for hemorrhage. Within tPA window.",
+      "PATIENT_ID: P006\nDATE: 2024-01-20\nCHIEF_COMPLAINT: Severe headache\nHISTORY: 34-year-old female with history of migraines presenting with worst headache of life, sudden onset, rated 10/10. No aura. No prior similar episode.\nVITALS: BP 148/92 mmHg, HR 96 bpm, RR 18/min, O2 Sat 99%, Temp 98.7F"
+    ],
+    "ground_truth": "Patient P003, a 78-year-old female with Alzheimer's disease, presented with acute confusion and agitation. Urinalysis was positive for leukocytes and nitrites suggesting UTI. Ciprofloxacin was prescribed and neurology was consulted for delirium management.",
+    "reference_contexts": [
+      "PATIENT_ID: P003. 78-year-old female with history of Alzheimer's disease presenting with acute confusion, agitation.",
+      "ASSESSMENT: Suspected urinary tract infection with delirium. Urinalysis positive for leukocytes and nitrites.",
+      "PLAN: Ciprofloxacin 500mg BID. Fall precautions. Neurology consult."
+    ]
+  },
+  {
+    "question": "What is the oxygen saturation of the patient with COPD?",
+    "answer": "The oxygen saturation of the patient (P007) with COPD is 88% on room air.",
+    "contexts": [
+      "PATIENT_ID: P007\nDATE: 2024-01-21\nCHIEF_COMPLAINT: Shortness of breath at rest\nHISTORY: 70-year-old male with known CHF and COPD presenting with worsening dyspnea, bilateral leg edema, and 8 lb weight gain over 5 days. Reports 2-pillow orthopnea.",
+      "VITALS: BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Sat 88% on room air, Temp 98.5F\nASSESSMENT: Acute decompensated heart failure exacerbation. BNP elevated at 1850 pg/mL. CXR shows pulmonary edema.\nPLAN: IV Lasix 80mg. Oxygen therapy. Strict I&O. Daily weights. Cardiology consult. Echo ordered.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA.\nRISK_LEVEL: HIGH",
+      "PATIENT_ID: P004\nDATE: 2024-01-18\nCHIEF_COMPLAINT: Uncontrolled blood sugar\nHISTORY: 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL. Reports poor medication compliance and increased thirst and urination for 1 week."
+    ],
+    "ground_truth": "Patient P007 with COPD and CHF had an oxygen saturation of 88% on room air, which is critically low and required oxygen therapy.",
+    "reference_contexts": [
+      "PATIENT_ID: P007. O2 Sat 88% on room air.",
+      "PLAN: IV Lasix 80mg. Oxygen therapy. Strict I&O."
+    ]
+  },
+  {
+    "question": "Which patient had a headache and what was the concern?",
+    "answer": "I don't have enough information. There is no mention of a headache in the provided context for any of the patients.",
+    "contexts": [
+      "PATIENT_ID: P010\nDATE: 2024-01-24\nCHIEF_COMPLAINT: Confusion and weakness\nHISTORY: 68-year-old male with hypertension presenting with sudden onset right-sided facial droop, right arm weakness, and slurred speech starting 1 hour ago. Wife confirms acute onset.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.\nPLAN: Emergent CT head. Neurosurgery on call. NPO. LP if CT negative. Nimodipine 60mg if SAH confirmed.\nRISK_LEVEL: HIGH",
+      "PATIENT_ID: P001\nDATE: 2024-01-15\nCHIEF_COMPLAINT: Chest pain and shortness of breath\nHISTORY: 65-year-old male with history of hypertension and type 2 diabetes presenting with acute chest pain radiating to left arm for 3 hours. Patient reports associated diaphoresis and nausea.",
+      "PATIENT_ID: P004\nDATE: 2024-01-18\nCHIEF_COMPLAINT: Uncontrolled blood sugar\nHISTORY: 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL. Reports poor medication compliance and increased thirst and urination for 1 week."
+    ],
+    "ground_truth": "Patient P006, a 34-year-old female, presented with the worst headache of her life rated 10/10 with sudden onset. The primary concern was ruling out subarachnoid hemorrhage. An emergent CT head was ordered along with neurosurgery consultation.",
+    "reference_contexts": [
+      "PATIENT_ID: P006. 34-year-old female with worst headache of life, sudden onset, rated 10/10.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.",
+      "PLAN: Emergent CT head. Neurosurgery on call. NPO."
+    ]
+  }
+]

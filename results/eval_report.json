@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-02-22T11:13:08.891223",
+  "num_questions": 10,
+  "ragas_scores": {
+    "faithfulness": 0.6667,
+    "answer_relevancy": 0.5444,
+    "context_recall": 0.5417,
+    "context_precision": 0.5476,
+    "answer_correctness": 0.4305
+  },
+  "custom_scores": {
+    "token_overlap_vs_gt": 0.232,
+    "fuzzy_similarity_vs_gt": 0.2286,
+    "context_hit_rate": 0.75,
+    "answer_length_score": 0.698,
+    "grounding_proxy": 0.5345
+  },
+  "per_question": [
+    {
+      "question": "What are the symptoms of the patient with chest pain?",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.9066,
+      "context_recall": 0.5,
+      "context_precision": 1.0,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "Which patient had a stroke and what treatment was given?",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.419,
+      "context_recall": NaN,
+      "context_precision": 1.0,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "What medications were prescribed to the diabetic patient?",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "context_recall": 0.0,
+      "context_precision": 0.0,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "Which patients are at high risk and need urgent attention?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": NaN,
+      "context_precision": NaN,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "What were the vitals of the patient with heart failure?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": NaN,
+      "context_precision": 0.0,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "What was the diagnosis for the patient with facial rash and joint pain?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": NaN,
+      "context_precision": NaN,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "Which patient had appendicitis and what was the plan?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": NaN,
+      "context_precision": 0.8333,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "What were the findings for the patient with altered mental status?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": NaN,
+      "context_precision": NaN,
+      "answer_correctness": NaN
+    },
+    {
+      "question": "What is the oxygen saturation of the patient with COPD?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_recall": 1.0,
+      "context_precision": 0.5,
+      "answer_correctness": 0.5625
+    },
+    {
+      "question": "Which patient had a headache and what was the concern?",
+      "faithfulness": 0.6667,
+      "answer_relevancy": 0.8518,
+      "context_recall": 0.6667,
+      "context_precision": 0.5,
+      "answer_correctness": 0.2985
+    }
+  ]
+}
