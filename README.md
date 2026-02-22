@@ -1,5 +1,9 @@
 # Clinical RAG Evaluation Framework
 
+**Live Dashboard:** [https://ragevaluationframework-udbqbxqbkuincsxbwczmzm.streamlit.app/](https://ragevaluationframework-udbqbxqbkuincsxbwczmzm.streamlit.app/)
+
+![RAG Evaluation Dashboard Screenshot](file:///Users/sriramtejasingaraju/.gemini/antigravity/brain/5dace53c-dfa4-495f-8342-686d8a705085/clinical_rag_dashboard_mockup_1771794298590.png)
+
 This framework provides a robust, multi-dimensional evaluation suite for clinical RAG (Retrieval-Augmented Generation) pipelines. It integrates RAGAS for semantic evaluation and a set of custom lexical proxies to ensure clinical accuracy and grounding.
 
 ## Conceptual Understanding
