@@ -1,0 +1,87 @@
+[
+  {
+    "question": "What are the symptoms of the patient with chest pain?",
+    "ground_truth": "Patient P001 is a 65-year-old male presenting with acute chest pain radiating to the left arm for 3 hours, associated with diaphoresis and nausea. ECG shows ST elevation suggesting STEMI.",
+    "reference_contexts": [
+      "PATIENT_ID: P001. 65-year-old male with history of hypertension and type 2 diabetes presenting with acute chest pain radiating to left arm for 3 hours. Associated diaphoresis and nausea.",
+      "ASSESSMENT: Suspected STEMI. Troponin elevated at 2.4 ng/mL. ECG shows ST elevation in leads II, III, aVF."
+    ]
+  },
+  {
+    "question": "Which patient had a stroke and what treatment was given?",
+    "ground_truth": "Patient P010, a 68-year-old male, had an acute ischemic stroke with right-sided facial droop and arm weakness. Treatment included tPA administration within the time window, stroke team activation, and ICU admission.",
+    "reference_contexts": [
+      "PATIENT_ID: P010. 68-year-old male with hypertension presenting with sudden onset right-sided facial droop, right arm weakness, and slurred speech starting 1 hour ago.",
+      "PLAN: tPA administration after consent. Stroke team activated. ICU admission. MRI brain ordered. Antiplatelet therapy post-tPA."
+    ]
+  },
+  {
+    "question": "What medications were prescribed to the diabetic patient?",
+    "ground_truth": "Patient P004 with uncontrolled type 2 diabetes and hyperglycemic hyperosmolar state was treated with an IV insulin drip, aggressive IV fluid resuscitation, and referred to endocrinology and diabetes education.",
+    "reference_contexts": [
+      "PATIENT_ID: P004. 52-year-old male with type 2 diabetes presenting with blood glucose of 420 mg/dL.",
+      "PLAN: IV insulin drip. Aggressive IV fluid resuscitation. Endocrinology consult. Diabetes education referral."
+    ]
+  },
+  {
+    "question": "Which patients are at high risk and need urgent attention?",
+    "ground_truth": "High risk patients include P001 (suspected STEMI), P003 (delirium with UTI), P004 (hyperglycemic hyperosmolar state), P006 (possible subarachnoid hemorrhage), P007 (acute decompensated heart failure), P008 (acute appendicitis), and P010 (acute ischemic stroke).",
+    "reference_contexts": [
+      "PATIENT_ID: P001. RISK_LEVEL: HIGH. Suspected STEMI. Emergent cardiology consult.",
+      "PATIENT_ID: P010. RISK_LEVEL: HIGH. Acute ischemic stroke. tPA administration.",
+      "PATIENT_ID: P007. RISK_LEVEL: HIGH. Acute decompensated heart failure. BNP elevated at 1850.",
+      "PATIENT_ID: P006. RISK_LEVEL: HIGH. Rule out subarachnoid hemorrhage."
+    ]
+  },
+  {
+    "question": "What were the vitals of the patient with heart failure?",
+    "ground_truth": "Patient P007 with acute decompensated heart failure had BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Saturation 88% on room air, and Temperature 98.5F.",
+    "reference_contexts": [
+      "PATIENT_ID: P007. VITALS: BP 152/96 mmHg, HR 108 bpm, RR 22/min, O2 Sat 88% on room air, Temp 98.5F.",
+      "ASSESSMENT: Acute decompensated heart failure exacerbation. BNP elevated at 1850 pg/mL."
+    ]
+  },
+  {
+    "question": "What was the diagnosis for the patient with facial rash and joint pain?",
+    "ground_truth": "Patient P009, a 30-year-old female, was suspected to have Systemic Lupus Erythematosus (SLE) based on butterfly facial rash, bilateral joint swelling, ANA positive 1:640, and elevated anti-dsDNA. She was started on hydroxychloroquine.",
+    "reference_contexts": [
+      "PATIENT_ID: P009. 30-year-old female presenting with butterfly-shaped facial rash, bilateral joint pain and swelling.",
+      "ASSESSMENT: Suspected Systemic Lupus Erythematosus (SLE). ANA positive 1:640. Anti-dsDNA elevated.",
+      "PLAN: Rheumatology referral. Hydroxychloroquine initiated."
+    ]
+  },
+  {
+    "question": "Which patient had appendicitis and what was the plan?",
+    "ground_truth": "Patient P008, a 28-year-old female, presented with acute appendicitis confirmed by CT scan. The plan included surgery consult for appendectomy, NPO status, IV antibiotics, and IV fluids.",
+    "reference_contexts": [
+      "PATIENT_ID: P008. CT abdomen shows inflamed appendix with periappendiceal fat stranding.",
+      "PLAN: Surgery consult for appendectomy. NPO. IV antibiotics. IV fluids."
+    ]
+  },
+  {
+    "question": "What were the findings for the patient with altered mental status?",
+    "ground_truth": "Patient P003, a 78-year-old female with Alzheimer's disease, presented with acute confusion and agitation. Urinalysis was positive for leukocytes and nitrites suggesting UTI. Ciprofloxacin was prescribed and neurology was consulted for delirium management.",
+    "reference_contexts": [
+      "PATIENT_ID: P003. 78-year-old female with history of Alzheimer's disease presenting with acute confusion, agitation.",
+      "ASSESSMENT: Suspected urinary tract infection with delirium. Urinalysis positive for leukocytes and nitrites.",
+      "PLAN: Ciprofloxacin 500mg BID. Fall precautions. Neurology consult."
+    ]
+  },
+  {
+    "question": "What is the oxygen saturation of the patient with COPD?",
+    "ground_truth": "Patient P007 with COPD and CHF had an oxygen saturation of 88% on room air, which is critically low and required oxygen therapy.",
+    "reference_contexts": [
+      "PATIENT_ID: P007. O2 Sat 88% on room air.",
+      "PLAN: IV Lasix 80mg. Oxygen therapy. Strict I&O."
+    ]
+  },
+  {
+    "question": "Which patient had a headache and what was the concern?",
+    "ground_truth": "Patient P006, a 34-year-old female, presented with the worst headache of her life rated 10/10 with sudden onset. The primary concern was ruling out subarachnoid hemorrhage. An emergent CT head was ordered along with neurosurgery consultation.",
+    "reference_contexts": [
+      "PATIENT_ID: P006. 34-year-old female with worst headache of life, sudden onset, rated 10/10.",
+      "ASSESSMENT: Rule out subarachnoid hemorrhage. CT head ordered emergently.",
+      "PLAN: Emergent CT head. Neurosurgery on call. NPO."
+    ]
+  }
+]
