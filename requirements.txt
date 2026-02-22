@@ -1,0 +1,14 @@
+ragas
+langchain
+langchain-groq
+langchain-community
+faiss-cpu
+sentence-transformers
+transformers
+torch
+streamlit
+plotly
+pandas
+python-dotenv
+datasets
+pypdf
