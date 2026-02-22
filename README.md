@@ -96,6 +96,17 @@ Launch the Streamlit dashboard to perform deep-dives into specific cases and agg
 streamlit run ui/dashboard.py
 ```
 
+## Interactive Dashboard Guide
+
+The visual dashboard is structured into six functional modules for multi-dimensional analysis:
+
+1.  **Aggregate Performance (Top KPIs)**: Instant "at-a-glance" view of the most critical semantic metrics (Faithfulness, Relevancy, Recall).
+2.  **Average RAGAS Scores (Bar Chart)**: Benchmarks the model against the standard quality threshold (Target: 0.70).
+3.  **Pipeline Characterization (Radar Chart)**: Visualizes the balance between the retrieval and generation layers.
+4.  **Individual Query Heatmap**: A color-coded grid mapping every clinical question to its specific scores to spot failure clusters.
+5.  **Case Investigation (Drill-Down)**: Enables a manual "sanity check" by comparing User Question, AI Answer, and Clinical Ground Truth side-by-side.
+6.  **Lexical Proxy Metrics**: Tracks deterministic indicators like Token Overlap and Context Hit Rate for local validation.
+
 ## Metric Definitions
 
 | Metric | Category | Clinical Significance |
